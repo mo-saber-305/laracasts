@@ -10,7 +10,7 @@
         <div class="flex-1 flex flex-col justify-between">
             <header class="mt-8 lg:mt-0">
                 <div class="space-x-2">
-                    <a href="{{ route('categories.show', $post->category->slug) }}"
+                    <a href="{{ route('category-posts', $post->category->slug) }}"
                        class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
                        style="font-size: 10px">{{ $post->category->name }}</a>
 
@@ -33,13 +33,15 @@
             </div>
 
             <footer class="flex justify-between items-center mt-8">
-                <div class="flex items-center text-sm">
-                    <img src="{{ asset('images/lary-avatar.svg') }}" alt="Lary avatar">
-                    <div class="ml-3">
-                        <h5 class="font-bold">{{ $post->author->name }}</h5>
-                        <h6>Mascot at Laracasts</h6>
+                <a href="{{ route('author-posts', $post->author->username) }}">
+                    <div class="flex items-center text-sm">
+                        <img src="{{ asset('images/lary-avatar.svg') }}" alt="Lary avatar">
+                        <div class="ml-3">
+                            <h5 class="font-bold">{{ $post->author->name }}</h5>
+                            <h6>Mascot at Laracasts</h6>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <div class="hidden lg:block">
                     <a href="{{ route('posts.show', $post->slug) }}"

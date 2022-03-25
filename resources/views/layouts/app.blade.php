@@ -11,9 +11,10 @@
         text-transform: capitalize;
     }
 </style>
+@yield('style')
 
 <body style="font-family: Open Sans, sans-serif">
-<section class="px-6 py-8">
+<section class="">
     @include('includes.navbar')
 
     @yield('content')

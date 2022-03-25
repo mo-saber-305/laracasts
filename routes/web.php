@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// auth route
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
+// frontend route
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/posts/{post:slug}', [HomeController::class, 'post'])->name('posts.show');
-Route::get('/categories/{category:slug}', [HomeController::class, 'category'])->name('categories.show');
+Route::get('/categories/{category:slug}', [HomeController::class, 'categoryPosts'])->name('category-posts');
+Route::get('/author/{author:username}', [HomeController::class, 'authorPosts'])->name('author-posts');

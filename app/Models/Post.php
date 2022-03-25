@@ -14,6 +14,27 @@ class Post extends Model
     protected $with = ['category', 'author'];
     protected $dates = ['published_at'];
 
+    public function scopeFilter($query, array $filters)
+    {
+
+        $query->when($filters['category'] ?? false, function ($q, $category) {
+            $q->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        });
+
+        $query->when($filters['author'] ?? false, function ($q, $author) {
+            $q->whereHas('author', function ($query) use ($author) {
+                $query->where('username', $author);
+            });
+        });
+
+        $query->when($filters['search'] ?? false, function ($q, $search) {
+            $q->where('title', 'like', '%' . $search . '%')
+                ->orWhere('excerpt', 'like', '%' . $search . '%');
+        });
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');

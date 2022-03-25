@@ -4,28 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function home(Request $request)
+    public function home()
     {
-        $posts = Post::query();
-        $categorySlug = $request->has('category') ? $request->get('category') : null;
+        $posts = Post::query()
+            ->filter(\request(['category', 'search', 'author']))->latest('published_at')->paginate(9);
 
-        if ($categorySlug != null) {
-            $category = Category::query()->where('slug', $categorySlug)->firstOrFail();
-            $posts = $posts->where('category_id', $category->id);
-            $categoryId = $category->id;
-        }
-
-        $posts = $posts->latest('published_at')->get();
-
-        $categories = Category::query()->get();
-
-        $categoryId = $categoryId ?? null;
-
-        return view('home', compact('posts', 'categories', 'categoryId'));
+        return view('home', compact('posts'));
     }
 
     public function post(Post $post)
@@ -33,9 +21,15 @@ class HomeController extends Controller
         return view('post', compact('post'));
     }
 
-    public function category(Category $category)
+    public function categoryPosts(Category $category)
     {
         $posts = $category->posts;
-        return view('category', compact('posts'));
+        return view('category-posts', compact('posts'));
+    }
+
+    public function authorPosts(User $author)
+    {
+        $posts = $author->posts;
+        return view('author-posts', compact('posts'));
     }
 }
