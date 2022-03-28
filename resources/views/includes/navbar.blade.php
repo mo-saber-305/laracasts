@@ -5,8 +5,17 @@
         </a>
     </div>
 
-    <div class="mt-8 md:mt-0">
-        <a href="/" class="text-xs font-bold uppercase">Home Page</a>
+    <div class="inline-flex items-center md:mt-0 mt-8">
+        @auth
+            <a href="{{ route('dashboard') }}" class="font-bold inline-flex items-center">
+                <img src="{{ auth()->user()->image }}" alt="{{ auth()->user()->name }}" class="mr-2 rounded-full w-12">
+                {{ auth()->user()->name }}
+            </a>
+        @else
+            <a href="{{ route('register') }}" class="font-bold">register</a>
+
+            <a href="{{ route('login') }}" class="font-bold ml-3">login</a>
+        @endauth
 
         <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
             Subscribe for Updates

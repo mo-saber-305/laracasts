@@ -1,16 +1,4 @@
-@extends('layouts.app')
-
-@section('style')
-    <style>
-        nav[role="navigation"] a,
-        nav[role="navigation"] span {
-            padding: 10px 20px;
-            background-color: #3b82f6;
-            color: #ffffff;
-            border-radius: 10px;
-        }
-    </style>
-@endsection
+@extends('layouts.frontend')
 
 @section('content')
     <header class="max-w-xl mx-auto mt-20 text-center">

@@ -35,7 +35,7 @@
             <footer class="flex justify-between items-center mt-8">
                 <a href="{{ route('author-posts', $post->author->username) }}">
                     <div class="flex items-center text-sm">
-                        <img src="{{ asset('images/lary-avatar.svg') }}" alt="Lary avatar">
+                        <img src="{{ $post->author->image }}" alt="Lary avatar" class="w-14 rounded-lg">
                         <div class="ml-3">
                             <h5 class="font-bold">{{ $post->author->name }}</h5>
                             <h6>Mascot at Laracasts</h6>

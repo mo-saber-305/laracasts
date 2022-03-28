@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,8 @@ class HomeController extends Controller
 
     public function post(Post $post)
     {
-        return view('post', compact('post'));
+        $comments = $post->comments;
+        return view('post', compact('post', 'comments'));
     }
 
     public function categoryPosts(Category $category)
@@ -31,5 +33,19 @@ class HomeController extends Controller
     {
         $posts = $author->posts;
         return view('author-posts', compact('posts'));
+    }
+
+    public function storeComment(Post $post, Request $request)
+    {
+        $request->validate([
+            'body' => 'required'
+        ]);
+
+        $post->comments()->create([
+            'user_id' => $request->user()->id,
+            'body' => $request->body
+        ]);
+
+        return redirect()->back();
     }
 }
