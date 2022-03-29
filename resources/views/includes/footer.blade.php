@@ -1,4 +1,5 @@
-<footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
+<footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16"
+        id="newsletter">
     <img src="{{ asset('images/lary-newsletter-icon.svg') }}" alt="" class="mx-auto -mb-6" style="width: 145px;">
     <h5 class="text-3xl">Stay in touch with the latest posts</h5>
     <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
@@ -6,14 +7,16 @@
     <div class="mt-10">
         <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">
 
-            <form method="POST" action="#" class="lg:flex text-sm">
+            <form method="POST" action="{{ route('newsletter') }}" class="lg:flex text-sm">
+                @csrf
                 <div class="lg:py-3 lg:px-5 flex items-center">
                     <label for="email" class="hidden lg:inline-block">
                         <img src="{{ asset('images/mailbox-icon.svg') }}" alt="mailbox letter">
                     </label>
 
-                    <input id="email" type="text" placeholder="Your email address"
+                    <input id="email" name="email" type="text" placeholder="Your email address"
                            class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
+
                 </div>
 
                 <button type="submit"
@@ -23,5 +26,8 @@
                 </button>
             </form>
         </div>
+        @error('email')
+        <div class="text-red-400 mt-2">{{ $message }}</div>
+        @enderror
     </div>
 </footer>

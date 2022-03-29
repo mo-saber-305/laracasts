@@ -21,12 +21,15 @@
             text-transform: capitalize;
         }
     </style>
+    @notifyCss
     @yield('style')
 </head>
 
 <body style="font-family: Open Sans, sans-serif">
 <section class="px-6 py-8">
     @include('includes.navbar')
+
+    @include('notify::components.notify')
 
     @yield('content')
 
@@ -35,5 +38,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 @yield('script')
+@notifyJs
 </body>
 </html>
