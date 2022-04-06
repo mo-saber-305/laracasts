@@ -20,6 +20,10 @@
         html, body {
             text-transform: capitalize;
         }
+
+        #sortbox:checked ~ #sortboxmenu {
+            opacity: 1;
+        }
     </style>
     @notifyCss
     @yield('style')

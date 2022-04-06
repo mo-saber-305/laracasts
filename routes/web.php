@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +19,20 @@ use Illuminate\Support\Facades\Route;
 
 // frontend route
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/posts/{post:slug}', [HomeController::class, 'post'])->name('posts.show');
-Route::post('/posts/{post:slug}/comment', [HomeController::class, 'storeComment'])->name('posts.store.comment');
-Route::get('/categories/{category:slug}', [HomeController::class, 'categoryPosts'])->name('category-posts');
-Route::get('/author/{author:username}', [HomeController::class, 'authorPosts'])->name('author-posts');
+/*comments routes*/
+Route::post('posts/{post:slug}/comment', [HomeController::class, 'storeComment'])->name('posts.store.comment');
+Route::get('categories/{category:slug}', [HomeController::class, 'categoryPosts'])->name('category-posts');
 
+/*posts routes*/
+Route::get('posts/author/{author:username}', [PostController::class, 'authorPosts'])->name('author-posts');
+Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('posts/store', [PostController::class, 'store'])->name('posts.store');
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{post:slug}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('posts/{post:slug}/update', [PostController::class, 'update'])->name('posts.update');
+Route::delete('posts/{post:slug}/destroy', [PostController::class, 'destroy'])->name('posts.destroy');
+
+/*newsletters route*/
 Route::post('newsletter', NewsletterController::class)->name('newsletter');
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

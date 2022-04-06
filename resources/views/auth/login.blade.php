@@ -1,9 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="fill-current text-gray-500"/>
-            </a>
+            <img src="{{ asset('images/lary-newsletter-icon.png') }}" alt=""
+                 class="mx-auto mb-3 rounded-full w-48">
         </x-slot>
 
         <!-- Session Status -->

@@ -15,7 +15,7 @@
                 </div>
             @endif
         @else
-            <h2 class="text-4xl text-center">Unfortunately, there are no posts in this category</h2>
+            <h2 class="text-4xl text-center">Unfortunately, there are no posts at the moment</h2>
         @endif
     </main>
 @endsection
